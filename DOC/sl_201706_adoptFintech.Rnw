@@ -1,0 +1,201 @@
+\documentclass{beamer}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{geometry}
+\geometry{verbose,tmargin=0mm,bmargin=0mm,lmargin=8mm,rmargin=3mm}
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\title{Adoption of FinTech:\\ Evidence from Demonetization in India}
+
+\newcommand{\fullpage}[1]{
+  \begin{frame}
+
+    \begin{center}
+      {\Large \textbf{#1}}
+    \end{center}
+
+  \end{frame}
+}
+
+\newcommand{\light}[1]{\textcolor{gray}{#1}}
+
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\begin{document}
+\maketitle
+
+\fullpage{Process flow: Digital transactions}
+
+\begin{frame}
+  \frametitle{NEFT process flow}
+  \begin{figure}
+    \begin{center}
+    \includegraphics[scale = 0.5, angle = 270]{GRAPHS/neft_process_flow.pdf}
+    \end{center}
+  \end{figure}
+\end{frame}
+
+\fullpage{Data details}
+
+\begin{frame}
+  \frametitle{Introduction}
+  \begin{footnotesize}
+    \bf{Three major data sets:} 
+    \begin{itemize}
+      \begin{footnotesize}
+      \item Location of RBI's currency chests
+      \item Data on digital transactions
+      \item Other data
+      \end{footnotesize}
+    \end{itemize}
+  \end{footnotesize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Location of RBI's currency chests}
+  \begin{footnotesize}
+    \begin{itemize}
+    \item Total no. of RBI's currency chests: 4,040
+    \item Total no. of unique pincode locations for currency chests: 2,915
+    \item Out of 2,915 unique pincode locations:
+      \begin{itemize}
+      \item 2,840 pincodes: clean observations 
+      \item 75 pincodes: junk, typo errors in pincodes (collected-manually)
+      \end{itemize}
+    \item \textbf{The final data base for currency chests includes pincodes for all 4,040 chests. These are exclusive of the chests in Panaji.}  
+    \end{itemize}
+  \end{footnotesize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Location of RBI's currency chests (4,040 chests)}
+  \begin{figure}
+    \includegraphics[scale = 0.45]{GRAPHS/india_cc_map.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Location of RBI's currency chests (Data snapshot)}
+  \begin{footnotesize}
+    <<echo=FALSE>>=
+    library(highr)
+    @
+    
+    <<rbi-currency-chest,echo=TRUE,include=TRUE>>=
+    load('../SRC/DATA/complete_data_cc.rda', verbose = TRUE)
+    head(cc_with_latlon, 9)
+    @
+  \end{footnotesize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data on digital transactions}
+  \begin{footnotesize}
+    \textbf{Databases}:
+    \begin{enumerate}
+    \item RuPay credit card (POS and e-commerce transactions) (NPCI)
+    \item NEFT (RBI)
+    \item RTGS (RBI)
+    \item Mobile transactions (RBI)
+    \end{enumerate}
+    \vspace{7mm}
+    \textbf{Geo-coding of transactions} data will be done using either:
+    \begin{enumerate}
+    \item Direct mapping for pincodes or
+    \item Indirect mapping for pincodes using IFSC codes
+    \end{enumerate}
+  \end{footnotesize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data on digital transactions: Direct mapping for pincodes}
+  \begin{footnotesize}
+    \textbf{India's complete pincodes directory}
+    \begin{itemize}
+    \item Total no. of unique locations: 154,797
+    \item Total no. of unique pincodes: 19,100
+    \item Out of 19,100 unique pincodes:
+      \begin{enumerate}
+      \item 18,867 pincodes: clean observations (153,250 locations)
+      \item 233 pincodes: junk, typo errors or pincode does not exist anymore 
+      \end{enumerate}
+    \end{itemize}
+  \end{footnotesize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data on digital transactions: Direct mapping for pincodes (18,867 pincodes)}
+  \begin{figure}
+    \includegraphics[scale = 0.45]{GRAPHS/india_pin_map.png}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Data on digital transactions: Direct mapping for pincodes (Data snapshot)}
+  \begin{footnotesize}
+    <<pincode-direct-mapping,echo=TRUE,include=TRUE>>=
+    load('../SRC/DATA/complete_data_pin_dir.rda', verbose = TRUE)
+    head(pin_dir_with_latlon, 9)
+    @
+  \end{footnotesize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Data on digital transactions: Indirect mapping of pincodes using IFSC}
+  \begin{footnotesize}
+    Quality of IFSC database available on web is poor.
+    \begin{itemize}
+    \item Total no. of banks: \textbf{196} (List of branches available for \textbf{195})
+    \item Total no. of bank branches: \textbf{151,921} 
+      \begin{enumerate}
+      \item Valid 11-digit IFSC codes available for \textbf{138,376}.
+      \item Valid pincodes available for \textbf{96,134}.
+        \begin{itemize}
+        \item Junk values due to typographical errors are possible.
+        \item No. of unique pincodes in IFSC database are 19,120 while in India's directory it is 19,100 (?)  
+        \end{itemize}
+      \end{enumerate}  
+    \end{itemize}
+  \end{footnotesize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Other data}
+  \begin{enumerate}
+    \begin{footnotesize}
+    \item Location of mobile towers across the country
+    \item Quality of mobile calls
+    \item Availability of 3G networks in an area
+    \item Number of subscribers
+    \item Mobile coverage
+    \item Mobile penetration data
+    \item Credit card data (CMIE consumer pyramids)
+    \item Bank account penetration data (CMIE consumer pyramids)
+    \item 2011 census data (city demographics, average education, percentage of salaried vs self-employed)
+    \item 2013 NSSO data (Formal vs informal employment)
+    \end{footnotesize}
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+  \begin{center}
+    Thank you.
+    \vspace{0.1in}
+  \end{center}
+\end{frame}
+
+
+\end{document}
+
