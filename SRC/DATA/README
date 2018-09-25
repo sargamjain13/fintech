@@ -1,0 +1,84 @@
+Motivation:
+This repository consists of data files used in the analysis to
+evaluate the adoption of fintech products around the event of
+demonetisation.
+
+Contents:
+Following is the list of files along with the description of data
+contained:
+
+  1. allindia_POlist_with_lat_long.csv
+     The file consists of data of pin codes for the entire
+     country. The column names are as following:
+     1a. officename
+     1b. pincode
+     1c. officeType
+     1d. Deliverystatus
+     1e. divisionname
+     1f. regionname
+     1g. circlename
+     1h. Taluk
+     1i. Districtname
+     1j. statename
+     1k. Telephone
+     1l. Related.Suboffice
+     1m. Related.Headoffice
+
+  2. currency_chest_rbi.csv
+     The file consists of data on addresses of all RBI currency chests
+     in the country. The column names are as following:
+     2a. S.No
+     2b. Name.of.the.State
+     2c. Name.of.the.District
+     2d. Bank.Name
+     2e. Name.of.the.CC.Branch
+     2f. Complete.Address.of.Currency.Chest
+     2g. Pin.code
+     2h. RBI.Office
+
+  3. rbi_regional_offices_jurisdiction.csv
+     The file consists of the list of RBI's regional offices and
+     offices under their jurisdiction. The column names are as
+     following:
+     3a. S.No
+     3b. RBI.regional.office
+     3c. RBI.regional.offices.under.jurisdiction
+     3d. Data.availability
+
+  4. IFSC
+     The folder consists of xls files for each of the 195 banks in
+     India. The column names in each of the xls files are:
+     4a. BANK
+     4b. IFSC
+     4c. MICR
+     4d. BRANCH
+     4e. ADDRESS
+     4f. CONTACT
+     4g. CITY
+     4h. DISTRICT
+     4i. STATE
+
+  5. IFSC_CSV
+     The folder consists of csv files converted from xls files in IFSC
+     folder using the Rscript: convert_ifsc_files.R. The column names
+     are same as in xls files.
+
+  6. latlon_currency_chests.rda
+     It is a .Rdata file consisting the pincodes of all unique
+     currency chests along with latitudes and longitudes. The R object
+     saved in the file is cc_latlon. The column names in the R object
+     are:
+     6a. cc_pin: The unique pincodes for currency chests
+     6b. lon: Longitudes for corresponding pincodes
+     6c. lat: Latitudes for corresponding pincodes
+      
+  7. latlon_bank_branches.rda  
+      It is a .Rdata file consisting the pincodes of all unique bank
+      branches along with latitudes and longitudes. The R object saved
+      in the file is bb_latlon. The column names in the R object are:
+      7a. bb_pin: The unique pincodes for bank branches
+      7b. lon: Longitudes for corresponding pincodes
+      7c. lat: Latitudes for corresponding pincodes
+      
+
+
