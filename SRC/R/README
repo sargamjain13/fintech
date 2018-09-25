@@ -1,0 +1,43 @@
+Motivation:
+This repository consists of R scripts used in the analysis to evaluate
+the adoption of fintech products post-demonetisation.
+
+Contents:
+Following is the list of files along with the description of data
+contained:
+
+  1. compile_analysis.R: Parent file that compiles all steps of
+  analysis.
+
+  2. read_currency_chest_data.R: Reads currency chests data and picks
+  cleaned up pincodes of currency chests using the function in the
+  sourced file, clean_address_pincode.R. Also generates longitudes and
+  latitudes for the pincodes.
+
+  3. clean_address_pincode.R: Consists of function that cleans up
+  pincodes for all currency chests listed under different RBI regional
+  office.
+
+  4. read_pincodes_data.R: Reads entire directory of pincodes in
+  India.
+
+  5. convert_ifsc_files.R: Creates .csv files from .xls files of IFSC
+  codes downloaded from the RBI website.
+
+  6. extract_IFSC_code.R: Reads .csv files for IFSC codes. Extracts pin
+  codes from bank branch addresses. Also generates longitudes and
+  latitudes for the pincodes.
+
+  7. compute_lat_lons.R: Consists of two functions:
+     a. generate_latlons_cc(): Generate latitudes and longitudes for
+     currency chest pincodes.
+     b. generate_latlons_pin_directory(): Generate latitudes and
+     longitudes for all pincodes of India.
+
+  8. plot_india_map.R: Consists of two functions:
+     a. plot_india_map_cc(): Maps currency chest pincodes on google tiles.
+     b. plot_india_map_pin_dir(): Maps India's pincode directory on google tiles.
+
+
+
+
